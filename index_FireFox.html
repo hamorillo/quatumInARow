@@ -15,15 +15,6 @@
 	</br>
 	<div><button onclick="create_matrix()">Create</button></div>
 
-	<div class="well">
-		<div class="row">
-			<div><button onclick="readTextFile()">Upload File</button></div>
-		</div>
-		<div class="row" id="parsed_csv_list">
-		</div>
-	</div>
-	</div>
-
 	<div class="row" id="parsed_csv_list">
 	</div>
 
@@ -41,20 +32,27 @@
 		<div class="right leg"></div>
 		<button id="restart">New game</button>
 	</div>
+	<script src="FileSaver.js"></script>
 	<script type="text/javascript">
 		var lenSelectedColumns = 0
+		var columnsHistory = []
 
-		readTextFile = function () {
+		writeNewColumnInFile = function () {
+			var blob = new Blob([JSON.stringify(columnsHistory)], { type: "text/plain;charset=utf-8" });
+			saveAs(blob, "test.csv");	
+		}
+
+		updateColumnsFromFile = function () {
 			var rawFile = new XMLHttpRequest();
 			rawFile.open("GET", 'test.csv', false);
 			rawFile.onreadystatechange = function () {
 				if (rawFile.readyState === 4) {
 					if (rawFile.status === 200 || rawFile.status == 0) {
 						var text = rawFile.responseText
-						var parsed = JSON.parse(text);
-						if (lenSelectedColumns !== parsed.length) {
-							lenSelectedColumns = parsed.length;
-							document.getElementById("color" + 1 + parsed[parsed.length - 1]).click()
+						columnsHistory = JSON.parse(text);
+						if (lenSelectedColumns !== columnsHistory.length) {
+							lenSelectedColumns = columnsHistory.length;
+							document.getElementById("color" + 1 + columnsHistory[columnsHistory.length - 1]).click()
 						}
 					}
 				}
@@ -63,9 +61,10 @@
 		}
 
 		create_matrix = function () {
+			writeNewColumnInFile()
 			window.clearInterval();
 			lenSelectedColumns = 0;
-			window.setInterval(readTextFile, 500);
+			window.setInterval(updateColumnsFromFile, 500);
 
 			matrix_rows = parseInt(document.getElementById("matrix_rows").value) + 1;
 			matrix_columns = parseInt(document.getElementById("matrix_columns").value) + 1;
@@ -169,7 +168,6 @@
 			})(document, window, "onclick", "getElementById", "className", "innerHTML", "confirm")("newgame", "won", "color", "restart", "p1", "p2");
 		}
 	</script>
-
 </body>
 
 </html>
