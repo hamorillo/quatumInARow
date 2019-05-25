@@ -36,6 +36,13 @@
 		var fileName = "columnsHistory.csv"
 		var shouldSendPost = true
 
+		sendStart = function () {
+			var http = new XMLHttpRequest();
+			http.open("POST", "http://127.0.0.1:5000/start", true);
+			http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			http.send()
+		}
+
 		sendSelectedColumn = function (column) {
 			if (shouldSendPost) {
 				lenSelectedColumns += 1
@@ -44,7 +51,7 @@
 				http.open("POST", "http://127.0.0.1:5000/selectcolumn?column=" + column, false);
 				http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				http.send()
-			}else{
+			} else {
 				shouldSendPost = true
 			}
 		}
@@ -68,7 +75,8 @@
 			rawFile.send(null);
 		}
 
-		create_matrix = function () {
+		create_matrix = function () {	
+			sendStart();	
 			window.clearInterval();
 			lenSelectedColumns = 0;
 			columnsHistory = []
@@ -96,7 +104,7 @@
 				}
 				t.appendChild(trow)
 			}
-
+			
 			(function (doc, win, onclick, gid, classname, content, showMessage) {
 
 				var
@@ -113,7 +121,7 @@
 						colorLabel[content] = colorLabel[classname] = players[current = (current + 1) % 2];
 						for (a = 1; a < matrix_rows; a++)
 							for (b = 1; b < matrix_columns; b++)
-								cellAt(a, b)[classname] = '';
+								cellAt(a, b)[classname] = '';						
 					},
 					makeMove = function (i, j, s) {
 						s > 0 && (cellAt(s, j)[classname] = '');
@@ -174,7 +182,7 @@
 					};
 					start();
 				};
-			})(document, window, "onclick", "getElementById", "className", "innerHTML", "confirm")("newgame", "won", "color", "restart", "p1", "p2");
+			})(document, window, "onclick", "getElementById", "className", "innerHTML", "confirm")("newgame", "won", "color", "restart", "p1", "p2");						
 		}
 	</script>
 </body>
