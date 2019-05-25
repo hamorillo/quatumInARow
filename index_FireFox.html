@@ -28,11 +28,8 @@
 		</div>
 		<table id="principal">
 		</table>
-		<div class="left leg"></div>
-		<div class="right leg"></div>
 		<button id="restart">New game</button>
 	</div>
-	<script src="FileSaver.js"></script>
 	<script type="text/javascript">
 		var lenSelectedColumns = 0
 		var columnsHistory = []
@@ -59,7 +56,7 @@
 		create_matrix = function () {
 			window.clearInterval();
 			lenSelectedColumns = 0;
-			window.setInterval(updateColumnsFromFile, 500);
+			window.setInterval(updateColumnsFromFile, 1500);
 
 			matrix_rows = parseInt(document.getElementById("matrix_rows").value) + 1;
 			matrix_columns = parseInt(document.getElementById("matrix_columns").value) + 1;
