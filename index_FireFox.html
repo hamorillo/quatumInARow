@@ -36,15 +36,11 @@
 	<script type="text/javascript">
 		var lenSelectedColumns = 0
 		var columnsHistory = []
-
-		writeNewColumnInFile = function () {
-			var blob = new Blob([JSON.stringify(columnsHistory)], { type: "text/plain;charset=utf-8" });
-			saveAs(blob, "test.csv");	
-		}
+		var fileName = "columnsHistory.csv"
 
 		updateColumnsFromFile = function () {
 			var rawFile = new XMLHttpRequest();
-			rawFile.open("GET", 'test.csv', false);
+			rawFile.open("GET", fileName, false);
 			rawFile.onreadystatechange = function () {
 				if (rawFile.readyState === 4) {
 					if (rawFile.status === 200 || rawFile.status == 0) {
@@ -61,7 +57,6 @@
 		}
 
 		create_matrix = function () {
-			writeNewColumnInFile()
 			window.clearInterval();
 			lenSelectedColumns = 0;
 			window.setInterval(updateColumnsFromFile, 500);
