@@ -37,7 +37,11 @@
 			 var number;
 			 var i;
 			 var j;
-             for (i = 1; i < matrix_rows; i++) { 
+
+			while (t.firstChild) {
+			    t.removeChild(t.firstChild);
+			}
+            for (i = 1; i < matrix_rows; i++) { 
              trow = document.createElement("tr");
 			     for (j = 1; j < matrix_columns; j++) {
 				 td = document.createElement("td");
