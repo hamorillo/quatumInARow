@@ -115,7 +115,7 @@ var lenSelectedColumns = 0
 							: colorLabel[content] = colorLabel[classname] = players[current = (current + 1) % 2]
 							: setTimeout(function () {
 								makeMove(i, j, s + 1)
-							}, 20);
+							}, 70);//Valor del tiempo de los movimientos "makeMove" de la animación.
 					};
 				return function (n, w, c, h, p1, p2) {
 					cid = c;
