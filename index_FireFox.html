@@ -34,6 +34,20 @@
 		var lenSelectedColumns = 0
 		var columnsHistory = []
 		var fileName = "columnsHistory.csv"
+		var shouldSendPost = true
+
+		sendSelectedColumn = function (column) {
+			if (shouldSendPost) {
+				lenSelectedColumns += 1
+				columnsHistory.push(column)
+				var http = new XMLHttpRequest();
+				http.open("POST", "http://127.0.0.1:5000/selectcolumn?column=" + column, false);
+				http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				http.send()
+			}else{
+				shouldSendPost = true
+			}
+		}
 
 		updateColumnsFromFile = function () {
 			var rawFile = new XMLHttpRequest();
@@ -45,6 +59,7 @@
 						columnsHistory = JSON.parse(text);
 						if (lenSelectedColumns !== columnsHistory.length) {
 							lenSelectedColumns = columnsHistory.length;
+							shouldSendPost = false
 							document.getElementById("color" + 1 + columnsHistory[columnsHistory.length - 1]).click()
 						}
 					}
@@ -56,6 +71,7 @@
 		create_matrix = function () {
 			window.clearInterval();
 			lenSelectedColumns = 0;
+			columnsHistory = []
 			window.setInterval(updateColumnsFromFile, 1500);
 
 			matrix_rows = parseInt(document.getElementById("matrix_rows").value) + 1;
@@ -149,6 +165,7 @@
 												makeMove(a, b, 0);
 												break;
 											}
+									sendSelectedColumn(b);
 								};
 							}(b);
 					;
