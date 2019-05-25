@@ -17,6 +17,8 @@
 <span id="p1">Red</span>
 <span id="p2">Yellow</span>
 <span id="newgame">Are you sure you want to start a new game?</span>
+<span id="won">The %s player won.
+	Do you want to play a new game?</span>
 </div>
             <table id="principal">			
             </table>
@@ -49,7 +51,7 @@
 			 (function (doc, win, onclick, gid, classname, content, showMessage) {
 			
 			var
-					a, b, c, colorLabel, cid, players, current, finished, newgameLabel, laststart = 1,
+					a, b, c, colorLabel, cid, players, current, finished, newgameLabel, wonLabel, laststart = 1,
 					cellAt = function (i, j) {
 						return doc[gid](cid + i + j);
 					},
@@ -92,7 +94,7 @@
                         return 4 < c - a;
                     }(i, j);
                 }(i, j)
-                        ? finished = 1 && start()
+				? finished = 1 && win[showMessage](doc[gid](wonLabel)[content].replace("%s", players[current].toLowerCase())) && start()
                         : colorLabel[content] = colorLabel[classname] = players[current = (current + 1) % 2]
                         : setTimeout(function () {
                             makeMove(i, j, s + 1)
@@ -100,9 +102,10 @@
 
             };
 
-			return function (n, c, h, p1, p2) {
+			return function (n, w, c, h, p1, p2) {
 				cid = c;
 				newgameLabel = n;
+				wonLabel = w;
 				colorLabel = doc[gid](c);
 				players = [doc[gid](p1)[content], doc[gid](p2)[content]];
 				for (a = 1; a < matrix_rows; a++)
@@ -123,7 +126,7 @@
 				};
 				start();
 			};
-		})(document, window, "onclick", "getElementById", "className", "innerHTML", "confirm")("newgame", "color", "restart", "p1", "p2");
+		})(document, window, "onclick", "getElementById", "className", "innerHTML", "confirm")("newgame", "won", "color", "restart", "p1", "p2");
 				  }
        </script>
 	   <!--<script src="code.js"></script>-->
