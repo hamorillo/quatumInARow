@@ -37,13 +37,12 @@
 		</div>
 		<table id="principal">
 		</table>
-		<div class="left leg"></div>
-		<div class="right leg"></div>
+		<!--<div class="left leg"></div>-->
+		<!--<div class="right leg"></div>-->
 		<button id="restart">New game</button>
 	</div>
 	<script type="text/javascript">
 		var lenSelectedColumns = 0
-
 		readTextFile = function () {
 			var rawFile = new XMLHttpRequest();
 			rawFile.open("GET", 'test.csv', false);
@@ -61,18 +60,15 @@
 			}
 			rawFile.send(null);
 		}
-
 		create_matrix = function () {
 			window.clearInterval();
 			lenSelectedColumns = 0;
-			window.setInterval(readTextFile, 500);
-
+			window.setInterval(readTextFile, 1500);
 			matrix_rows = parseInt(document.getElementById("matrix_rows").value) + 1;
 			matrix_columns = parseInt(document.getElementById("matrix_columns").value) + 1;
 			t = document.querySelector("#principal");
 			trow = document.createElement("tr");
 			td = document.createElement("td");
-
 			var number;
 			var i;
 			var j;
@@ -89,9 +85,7 @@
 				}
 				t.appendChild(trow)
 			}
-
 			(function (doc, win, onclick, gid, classname, content, showMessage) {
-
 				var
 					a, b, c, colorLabel, cid, players, current, finished, newgameLabel, wonLabel, laststart = 1,
 					cellAt = function (i, j) {
