@@ -18,7 +18,7 @@ def selectcolumn():
     return str(column)
 
 def removeFile():
-    open(fileName, 'w').close()
+    open(fileName, 'w+').close()
 
 def clearFile():
     removeFile()
