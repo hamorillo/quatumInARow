@@ -44,7 +44,7 @@ create_matrix = function () {
 	window.clearInterval();
 	lenSelectedColumns = 0;
 	columnsHistory = []
-	window.setInterval(updateColumnsFromFile, 1500);
+	window.setInterval(updateColumnsFromFile, 500); //Tiempo de lectura del fichero de texto, y actualizacion de la matriz de juego.
 	matrix_rows = parseInt(document.getElementById("matrix_rows").value) + 1;
 	matrix_columns = parseInt(document.getElementById("matrix_columns").value) + 1;
 	t = document.querySelector("#principal");
@@ -161,7 +161,6 @@ update_player_identification = function (lenSelectedColumns) {
 	}
 	else {
 		document.getElementById("player_identification").innerHTML = "";
-		document.getElementById("number_of_moves").innerHTML = "";
 		document.getElementById("number_of_moves").innerHTML = "Number of moves = 0";
 	}
 }
