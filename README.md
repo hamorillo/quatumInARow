@@ -12,6 +12,7 @@ And finally, run Flask.
 
 *************************
 set FLASK_APP=server.py
+
 flask run
 *************************
 
