@@ -1,7 +1,7 @@
 # quantumInARow
 Qiskit Hackaton Madrid
 
-Is is neccesary to install Flask in Python.
+It is neccesary to install Flask in Python.
 This is the command to do so:
 ********************
 pip install Flask
