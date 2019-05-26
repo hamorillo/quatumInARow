@@ -10,11 +10,19 @@ pip install Flask
 After having Flask installed, you need to set FLASK_APP to the Python (.py) file that have the code for responding to HTTP requests.
 And finally, run Flask.
 
+For Linux / Mac OS
 *************************
 set FLASK_APP=server.py
 
 flask run
 *************************
+
+For Windows (PowerShell console)
+*****************************
+$env:FLASK_APP = "server.py"
+
+flask run
+*****************************
 
 If everything is ok, you will see an output like this:
 -----------------------------------------------------------------------------
